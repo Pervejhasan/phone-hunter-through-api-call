@@ -59,14 +59,20 @@ const processSearch=(dataLimit)=>{
 }
 
 
-
-
-
-
 //handle search button click
 document.getElementById("phone-search").addEventListener("click", function () {
   processSearch(10);
 });
+
+//search input field enter key handler
+document.getElementById('search-field').addEventListener('keypress',function(e){
+// console.log(e.key);
+  if(e.key==='Enter'){
+// console.log('Enter button clicked');
+processSearch(10);
+}
+})
+
 // loadPhone();
 const toggleSpinner=isLoadding=>{
 const loaderSection=document.getElementById('loader');
