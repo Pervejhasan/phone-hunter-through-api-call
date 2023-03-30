@@ -16,7 +16,6 @@ showAllData.classList.remove('d-none');
 }else{
   showAllData.classList.add('d-none');
 }
-
   //no  phone found
   const noFoundPhone = document.getElementById("no-found-phone");
   if (phones.length === 0) {
@@ -36,9 +35,6 @@ showAllData.classList.remove('d-none');
       <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
       <a href="#"  type="button" data-bs-toggle="modal"
       data-bs-target="#showProductDetails" onClick="loadPhoneDetails('${phone.slug}')" class="btn btn-primary ">Show Details</a>
-     
-      
-      
       </div>
   </div>
     `;
@@ -49,7 +45,6 @@ showAllData.classList.remove('d-none');
 toggleSpinner(false);
 
 }
-
 const processSearch=(dataLimit)=>{
   toggleSpinner(true);
   const searchField = document.getElementById("search-field");
@@ -57,13 +52,10 @@ const processSearch=(dataLimit)=>{
   // searchField.value = "";
   loadPhone(searchText,dataLimit);
 }
-
-
 //handle search button click
 document.getElementById("phone-search").addEventListener("click", function () {
   processSearch(10);
 });
-
 //search input field enter key handler
 document.getElementById('search-field').addEventListener('keypress',function(e){
 // console.log(e.key);
@@ -72,7 +64,6 @@ document.getElementById('search-field').addEventListener('keypress',function(e){
 processSearch(10);
 }
 })
-
 // loadPhone();
 const toggleSpinner=isLoadding=>{
 const loaderSection=document.getElementById('loader');
@@ -85,14 +76,9 @@ else{
 }
 
 //not the best way to load show all
-
 document.getElementById('btn-showAll').addEventListener('click',function(){
-
 processSearch();
-
 })
-
-
 // load PhoneDetails
 const loadPhoneDetails=(id)=>{
 const url=`https://openapi.programming-hero.com/api/phone/${id}`;
@@ -100,8 +86,6 @@ fetch(url)
 .then(res=>res.json())
 .then(data=>showProductDetails(data.data))
 }
-
-
 const showProductDetails=(data)=>{
   // console.log(data);
   document.getElementById("productDetailsImage").src = data.image;
@@ -113,7 +97,9 @@ const showProductDetails=(data)=>{
   <h5 class="modal-title"><b>Company Name: </b> ${data.brand}</h1>
   <h5><b>Memory: </b>${data.mainFeatures.memory}</h3>
   <h5><b>Storage: </b>${data.mainFeatures.storage}</h3>
-  <h5><b>ReleaseDate: </b>${data.releaseDate?data.releaseDate:new Date("2021-03-25")}</h4>
+  <h5><b>ReleaseDate: </b>${data.releaseDate?data.releaseDate :"No Release Date Found."}</h4>
+  <h5><b>Others: </b>${data.others?data.others.Bluetooth :"No Bluetooth Information."}</h4>
 `;
+// data.releaseDate:new Date("2021-03-25")
 showDetailsContainer.appendChild(showDetailsDiv);
 }
